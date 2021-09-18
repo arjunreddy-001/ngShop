@@ -5,6 +5,9 @@
 environment.prod.ts
 environment.ts
 
+#firebase
+/.firebase
+
 # compiled output
 /dist
 /tmp
