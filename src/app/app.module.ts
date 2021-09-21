@@ -1,3 +1,4 @@
+import { ProductService } from './services/product.service';
 import { environment } from '../environments/environment';
 
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -25,6 +27,9 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { UserService } from './services/user.service';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
+import { ProductFormComponent } from './components/admin/product-form/product-form.component';
+import { CategoryService } from './services/category.service';
+import { NarikCustomValidatorsModule } from '@narik/custom-validators';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -56,6 +61,11 @@ const appRoutes: Routes = [
     component: AdminOrdersComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
   },
+  {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+  },
 ];
 
 @NgModule({
@@ -71,6 +81,7 @@ const appRoutes: Routes = [
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,8 +91,17 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    FormsModule,
+    NarikCustomValidatorsModule,
   ],
-  providers: [AuthService, AuthGuard, UserService, AdminAuthGuard],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGuard,
+    CategoryService,
+    ProductService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
