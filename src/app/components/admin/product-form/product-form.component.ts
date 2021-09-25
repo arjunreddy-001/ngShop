@@ -21,7 +21,7 @@ export class ProductFormComponent implements OnInit {
     private productSvc: ProductService
   ) {
     this.categorySvc
-      .getCategories()
+      .getAll()
       .subscribe((categories: any) => (this.categories$ = categories));
 
     this.pid = this.route.snapshot.paramMap.get('pid');

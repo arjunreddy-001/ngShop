@@ -37,7 +37,7 @@ import { CategoryService } from './services/category.service';
 import { NarikCustomValidatorsModule } from '@narik/custom-validators';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: ProductsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
   { path: 'login', component: LoginComponent },

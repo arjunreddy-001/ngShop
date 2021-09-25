@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class CategoryService {
   constructor(private db: AngularFirestore) {}
 
-  getCategories() {
-    return this.db.collection(`categories`).valueChanges();
+  getAll() {
+    return this.db.collection(`categories`).valueChanges({ idField: 'key' });
   }
 }
