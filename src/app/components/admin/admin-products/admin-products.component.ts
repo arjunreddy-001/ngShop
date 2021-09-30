@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.scss'],
 })
-export class AdminProductsComponent implements OnInit, OnDestroy {
+export class AdminProductsComponent implements OnDestroy {
   products: any[] = [];
   dataSource: any;
   items: any[] = [];
@@ -30,8 +30,6 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
       this.initializeTable(products);
     });
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

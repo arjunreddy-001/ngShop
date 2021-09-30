@@ -1,6 +1,6 @@
 import { ProductService } from './../../../services/product.service';
 import { Product } from './../../../models/product.model';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss'],
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent {
   categories$: any;
   product: any = {};
   pid;
@@ -33,8 +33,6 @@ export class ProductFormComponent implements OnInit {
         .subscribe((p) => (this.product = p));
     }
   }
-
-  ngOnInit(): void {}
 
   saveProduct(product: Product) {
     if (this.pid) {

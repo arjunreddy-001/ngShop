@@ -35,6 +35,9 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { ProductFormComponent } from './components/admin/product-form/product-form.component';
 import { CategoryService } from './services/category.service';
 import { NarikCustomValidatorsModule } from '@narik/custom-validators';
+import { ProductsFilterComponent } from './components/products/products-filter/products-filter.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 const appRoutes: Routes = [
   { path: '', component: ProductsComponent },
@@ -92,6 +95,8 @@ const appRoutes: Routes = [
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
+    ProductsFilterComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,6 +121,7 @@ const appRoutes: Routes = [
     AdminAuthGuard,
     CategoryService,
     ProductService,
+    ShoppingCartService,
   ],
   bootstrap: [AppComponent],
 })
