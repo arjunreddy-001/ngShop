@@ -1,0 +1,11 @@
+<div class="row no-gutters d-flex align-items-center">
+    <div class="col-3">
+        <button class="btn btn-danger btn-block" (click)="removeFromCart()"><span class="cart-action">-</span></button>
+    </div>
+    <div class="col text-center">
+        <div>{{ getQuantity() }} in cart</div>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-success btn-block" (click)="addToCart()"><span class="cart-action">+</span></button>
+    </div>
+</div>

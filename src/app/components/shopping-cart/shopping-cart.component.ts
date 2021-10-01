@@ -1,15 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, OnDestroy {
+  cartItems: any;
+  cartQuantity: number | null = null;
+  cartTotal: number | null = null;
+  cartSubscription: Subscription | undefined;
 
-  constructor() { }
+  constructor(private cartSvc: ShoppingCartService) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
+    let cart$ = await this.cartSvc.getCart();
+    this.cartSubscription = cart$.subscribe((cartItems) => {
+      this.cartItems = cartItems;
+      this.cartQuantity = this.cartSvc.getCartQuantity(cartItems);
+      this.cartTotal = cartItems.reduce((total, item) => {
+        return total + item.product.price * item.quantity;
+      }, 0);
+    });
   }
 
+  ngOnDestroy(): void {
+    this.cartSubscription?.unsubscribe();
+  }
 }

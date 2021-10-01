@@ -38,6 +38,7 @@ import { NarikCustomValidatorsModule } from '@narik/custom-validators';
 import { ProductsFilterComponent } from './components/products/products-filter/products-filter.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProductsComponent },
@@ -97,6 +98,7 @@ const appRoutes: Routes = [
     ProductFormComponent,
     ProductsFilterComponent,
     ProductCardComponent,
+    ProductQuantityComponent,
   ],
   imports: [
     BrowserModule,

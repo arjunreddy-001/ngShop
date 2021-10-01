@@ -1,19 +1,23 @@
 import { Component, Input } from '@angular/core';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+
 @Component({
-  selector: 'app-product-card',
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.scss'],
+  selector: 'app-product-quantity',
+  templateUrl: './product-quantity.component.html',
+  styleUrls: ['./product-quantity.component.scss'],
 })
-export class ProductCardComponent {
+export class ProductQuantityComponent {
   @Input('product') product: any;
-  @Input('show-actions') showActions: boolean = true;
   @Input('shopping-cart') shoppingCart: any;
 
   constructor(private cartSvc: ShoppingCartService) {}
 
   addToCart() {
     this.cartSvc.add(this.product);
+  }
+
+  removeFromCart() {
+    this.cartSvc.remove(this.product);
   }
 
   getQuantity() {

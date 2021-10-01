@@ -66,4 +66,42 @@ export class ShoppingCartService {
         }
       });
   }
+
+  async remove(product: any) {
+    let cartId = await this.getOrCreateCartId();
+    let item$ = this.getItem(cartId, product.key);
+
+    item$
+      .snapshotChanges()
+      .pipe(take(1))
+      .subscribe((item: any) => {
+        if (item.payload.exists) {
+          // If item exists in shopping cart
+          let quantityFromDb;
+
+          item$
+            .valueChanges()
+            .pipe(take(1))
+            .subscribe((itemPayload: any) => {
+              quantityFromDb = itemPayload.quantity;
+
+              // If quantity is 1, remove item from db
+              // else decrement quantity by 1
+              if (quantityFromDb === 1) {
+                item$.delete();
+              } else {
+                item$.update({ quantity: quantityFromDb - 1 });
+              }
+            });
+        }
+      });
+  }
+
+  getCartQuantity(cart: any) {
+    let cartQuantity = 0;
+    cart.forEach((cartItem: any) => {
+      cartQuantity = cartQuantity + cartItem.quantity;
+    });
+    return cartQuantity;
+  }
 }
