@@ -40,6 +40,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
 import { OrderService } from './services/order.service';
+import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProductsComponent },
@@ -100,6 +102,8 @@ const appRoutes: Routes = [
     ProductsFilterComponent,
     ProductCardComponent,
     ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent,
   ],
   imports: [
     BrowserModule,

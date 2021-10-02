@@ -11,10 +11,22 @@ export class UserService {
   constructor(private db: AngularFirestore) {}
 
   save(user: firebase.User) {
-    this.db.doc(`/users/${user.uid}`).update({
-      name: user.displayName,
-      email: user.email,
-    });
+    this.db
+      .doc(`/users/${user.uid}`)
+      .get()
+      .subscribe((res) => {
+        if (res.exists) {
+          this.db.doc(`/users/${user.uid}`).update({
+            name: user.displayName,
+            email: user.email,
+          });
+        } else {
+          this.db.doc(`/users/${user.uid}`).set({
+            name: user.displayName,
+            email: user.email,
+          });
+        }
+      });
   }
 
   get(uid: string): Observable<AppUser> {

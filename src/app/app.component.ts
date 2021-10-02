@@ -19,13 +19,13 @@ export class AppComponent {
     this.authSvc.user$.subscribe((user) => {
       if (!user) return;
 
-      userSvc.save(user);
+      this.userSvc.save(user);
       let returnUrl = localStorage.getItem('returnUrl');
 
       if (!returnUrl) return;
 
       localStorage.removeItem('returnUrl');
-      router.navigateByUrl(returnUrl);
+      this.router.navigateByUrl(returnUrl);
     });
   }
 }

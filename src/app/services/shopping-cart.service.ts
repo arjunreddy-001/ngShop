@@ -112,13 +112,10 @@ export class ShoppingCartService {
       .collection(`/shopping-lists/${cartId}/items`)
       .valueChanges()
       .subscribe((cartItems) => {
-        console.log(cartItems);
-
         cartItems.forEach((item: any) => {
           this.db
             .doc(`/shopping-lists/${cartId}/items/${item.product.key}`)
-            .delete()
-            .then(() => console.log('Item deleted', item.product.title));
+            .delete();
         });
       });
   }

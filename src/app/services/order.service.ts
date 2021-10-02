@@ -19,4 +19,16 @@ export class OrderService {
     this.cartSvc.clear();
     return result;
   }
+
+  getOrders() {
+    return this.db.collection(`orders`).valueChanges();
+  }
+
+  getOrdersByUser(userId: string) {
+    return this.db
+      .collection('orders', (ref) => {
+        return ref.where('userId', '==', userId);
+      })
+      .valueChanges();
+  }
 }
