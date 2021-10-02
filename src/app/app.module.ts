@@ -39,6 +39,7 @@ import { ProductsFilterComponent } from './components/products/products-filter/p
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
+import { OrderService } from './services/order.service';
 
 const appRoutes: Routes = [
   { path: '', component: ProductsComponent },
@@ -51,7 +52,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'order-success',
+    path: 'order-success/:oid',
     component: OrderSuccessComponent,
     canActivate: [AuthGuard],
   },
@@ -124,6 +125,7 @@ const appRoutes: Routes = [
     CategoryService,
     ProductService,
     ShoppingCartService,
+    OrderService,
   ],
   bootstrap: [AppComponent],
 })
