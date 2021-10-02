@@ -11,7 +11,7 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 })
 export class NavbarComponent implements OnInit {
   appUser: AppUser | null = null;
-  cartQuantity: number | null = null;
+  cartQuantity: number = 0;
 
   constructor(
     private authSvc: AuthService,

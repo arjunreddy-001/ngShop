@@ -9,7 +9,7 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   cartItems: any;
-  cartQuantity: number | null = null;
+  cartQuantity: number = 0;
   cartTotal: number | null = null;
   cartSubscription: Subscription | undefined;
 
@@ -28,5 +28,9 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cartSubscription?.unsubscribe();
+  }
+
+  clearCart() {
+    this.cartSvc.clear();
   }
 }

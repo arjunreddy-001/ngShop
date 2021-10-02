@@ -56,7 +56,6 @@ export class ShoppingCartService {
             .valueChanges()
             .pipe(take(1))
             .subscribe((itemPayload: any) => {
-              console.log(itemPayload);
               quantityFromDb = itemPayload.quantity;
               item$.update({ quantity: quantityFromDb + 1 });
             });
@@ -103,5 +102,22 @@ export class ShoppingCartService {
       cartQuantity = cartQuantity + cartItem.quantity;
     });
     return cartQuantity;
+  }
+
+  async clear() {
+    let cartId = await this.getOrCreateCartId();
+    this.db
+      .collection(`/shopping-lists/${cartId}/items`)
+      .valueChanges()
+      .subscribe((cartItems) => {
+        console.log(cartItems);
+
+        cartItems.forEach((item: any) => {
+          this.db
+            .doc(`/shopping-lists/${cartId}/items/${item.product.key}`)
+            .delete()
+            .then(() => console.log('Item deleted', item.product.title));
+        });
+      });
   }
 }

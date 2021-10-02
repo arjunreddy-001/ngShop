@@ -19,7 +19,17 @@ export class ProductsComponent implements OnInit {
     private productSvc: ProductService,
     private route: ActivatedRoute,
     private cartSvc: ShoppingCartService
-  ) {
+  ) {}
+
+  async ngOnInit() {
+    (await this.cartSvc.getCart()).subscribe((cart) => {
+      this.cart = cart;
+    });
+
+    this.populateProducts();
+  }
+
+  private populateProducts() {
     this.productSvc
       .getAll()
       .pipe(
@@ -30,16 +40,13 @@ export class ProductsComponent implements OnInit {
       )
       .subscribe((params) => {
         this.activeCategory = params.get('category');
-
-        this.filteredProducts = this.activeCategory
-          ? this.products.filter((p) => p.category === this.activeCategory)
-          : this.products;
+        this.applyFilter();
       });
   }
 
-  async ngOnInit() {
-    (await this.cartSvc.getCart()).subscribe((cart) => {
-      this.cart = cart;
-    });
+  private applyFilter() {
+    this.filteredProducts = this.activeCategory
+      ? this.products.filter((p) => p.category === this.activeCategory)
+      : this.products;
   }
 }
