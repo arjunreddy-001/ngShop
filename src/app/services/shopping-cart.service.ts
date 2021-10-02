@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { ShoppingCart } from '../models/shopping-cart.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class ShoppingCartService {
     return this.db
       .doc(`/shopping-lists/${cartId}`)
       .collection(`items`)
-      .valueChanges({ idField: 'key' });
+      .valueChanges({ idField: 'key' })
+      .pipe(map((cartItems: any) => new ShoppingCart(cartItems)));
   }
 
   private getItem(cartId: string, productId: string) {

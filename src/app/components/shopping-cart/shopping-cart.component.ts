@@ -17,12 +17,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<any> {
     let cart$ = await this.cartSvc.getCart();
-    this.cartSubscription = cart$.subscribe((cartItems) => {
-      this.cartItems = cartItems;
-      this.cartQuantity = this.cartSvc.getCartQuantity(cartItems);
-      this.cartTotal = cartItems.reduce((total, item) => {
-        return total + item.product.price * item.quantity;
-      }, 0);
+
+    this.cartSubscription = cart$.subscribe((cart) => {
+      this.cartItems = cart.items;
+      this.cartQuantity = cart.cartQuantity;
+      this.cartTotal = cart.cartTotal;
     });
   }
 

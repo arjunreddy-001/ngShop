@@ -23,7 +23,7 @@ export class ProductsComponent implements OnInit {
 
   async ngOnInit() {
     (await this.cartSvc.getCart()).subscribe((cart) => {
-      this.cart = cart;
+      this.cart = cart.items;
     });
 
     this.populateProducts();
