@@ -13,6 +13,7 @@ export class ProductFormComponent {
   categories$: any;
   product: any = {};
   pid;
+  isNew: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,10 +28,13 @@ export class ProductFormComponent {
     this.pid = this.route.snapshot.paramMap.get('pid');
 
     if (this.pid) {
+      this.isNew = false;
       this.productSvc
         .get(this.pid)
         .pipe(take(1))
         .subscribe((p) => (this.product = p));
+    } else {
+      this.isNew = true;
     }
   }
 

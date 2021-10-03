@@ -53,7 +53,7 @@
             </div>
 
             <button class="btn btn-success">Save</button>
-            <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+            <button *ngIf="!isNew" type="button" (click)="delete()" class="btn btn-danger ml-3">Delete</button>
         </form>
     </div>
     <div class="col-md-6">

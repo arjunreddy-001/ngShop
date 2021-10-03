@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CategoryService } from 'shared/services/category.service';
 
 @Component({
@@ -6,12 +6,14 @@ import { CategoryService } from 'shared/services/category.service';
   templateUrl: './products-filter.component.html',
   styleUrls: ['./products-filter.component.scss'],
 })
-export class ProductsFilterComponent {
+export class ProductsFilterComponent implements OnInit {
   categories: any[] = [];
 
   @Input('activeCategory') activeCategory: any;
 
-  constructor(private categorySvc: CategoryService) {
+  constructor(private categorySvc: CategoryService) {}
+
+  ngOnInit() {
     this.categorySvc
       .getAll()
       .subscribe((categories) => (this.categories = categories));

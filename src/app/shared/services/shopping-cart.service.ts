@@ -65,9 +65,8 @@ export class ShoppingCartService {
         } else {
           // If item is not in shopping cart
           console.log('if not exists', item);
-          item$
-            .set({ product: product, quantity: 1 })
-            .then((res) => console.log(res));
+          console.log('product', product);
+          item$.set({ product: product, quantity: 1 }, { merge: true });
         }
       });
   }
@@ -115,6 +114,7 @@ export class ShoppingCartService {
     this.db
       .collection(`/shopping-lists/${cartId}/items`)
       .valueChanges()
+      .pipe(take(1))
       .subscribe((cartItems) => {
         cartItems.forEach((item: any) => {
           this.db
